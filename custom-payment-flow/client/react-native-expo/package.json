@@ -45,5 +45,8 @@
     "wdio-chromedriver-service": "^7.2.2",
     "webdriverio": "^7.16.2"
   },
-  "private": true
+  "private": true,
+  "overrides": {
+    "tar@<7.5.21": "7.5.21"
+  }
 }
