@@ -1,6 +1,10 @@
 const express = require('express');
 const cors = require('cors');
+// Helmet helps secure Express apps by setting HTTP response headers
+const helmet = require('helmet');
 const app = express();
+// Enable Helmet middleware to set security headers (HSTS, CSP, X-Frame-Options, etc.)
+app.use(helmet());
 const { resolve } = require('path');
 // Replace if using a different env file or config
 const env = require('dotenv').config({ path: './.env' });
