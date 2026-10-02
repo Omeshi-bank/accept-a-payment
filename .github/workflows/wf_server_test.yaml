@@ -37,6 +37,8 @@ jobs:
           STRIPE_PUBLISHABLE_KEY: ${{ secrets.TEST_STRIPE_PUBLISHABLE_KEY }}
           STRIPE_SECRET_KEY: ${{ secrets.TEST_STRIPE_SECRET_KEY }}
           PRICE: ${{ secrets.TEST_PRICE }}
+          SERVER_TYPE: ${{ inputs.server_type }}
+          SERVER_IMAGE: ${{ inputs.server_image }}
         run: |
           source sample-ci/helpers.sh
           setup_dependencies
@@ -49,7 +51,7 @@ jobs:
             PAYMENT_METHOD_TYPES="card"
           EOF
 
-          configure_docker_compose_for_integration "${{ matrix.target.sample }}" "${{ inputs.server_type }}" ../../client/html "${{ inputs.server_image }}"
+          configure_docker_compose_for_integration "${{ matrix.target.sample }}" "$SERVER_TYPE" ../../client/html "$SERVER_IMAGE"
 
           docker compose up -d && wait_web_server
           docker compose exec -T runner bundle exec rspec spec/${{ matrix.target.tests }}
